@@ -1,0 +1,11 @@
+[package]
+name = "dehtml"
+version = "0.1.0"
+authors = ["Stacey Ell <stacey.ell@gmail.com>"]
+
+[dependencies]
+html5ever = "*"
+tendril = "*"
+serde = "*"
+serde_json = "*"
+url = "0.5"
