@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+from __future__ import print_function
+
 import sys
 import json
 import lib
@@ -12,12 +14,10 @@ for line in sys.stdin.xreadlines():
     try:
         bout = json.loads(lib.parse_html(body))
         good_ctr += 1
-    except lib.DeHtmlError as e:
-        print("{} error: {}".format(type(e).__name__, e))
+    except (lib.DeHtmlError, ValueError) as e:
+        print(line.strip())
+        print("{} error: {}".format(type(e).__name__, e), file=sys.stderr)
         continue
-    except ValueError as e:
-        print("{} error: {}".format(type(e).__name__, e))
-        continue
-    print("OK {!r}".format(bout))
+    print("OK {!r}".format(bout), file=sys.stderr)
 
-print("{} / {}".format(good_ctr, total_ctr))
+print("{} / {}".format(good_ctr, total_ctr), file=sys.stderr)
